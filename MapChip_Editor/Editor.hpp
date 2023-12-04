@@ -127,13 +127,24 @@ struct Editor {
 
 			int plus = texture.width() / size;
 
-			spawn_rect.x += plus;
+			bool stop = false;
 
-			if (10 == spawn_rect.x) {
-				spawn_rect.x = 0;
-				spawn_rect.y++;
+			if (10 <= spawn_rect.x + plus) {
+
+				if (10 <= spawn_rect.y + 1) {
+					stop = true;
+				}
 			}
 
+			if (false == stop) {
+
+				spawn_rect.x += plus;
+
+				if (10 == spawn_rect.x) {
+					spawn_rect.x = 0;
+					spawn_rect.y++;
+				}
+			}
 		}
 
 
@@ -229,7 +240,9 @@ struct Editor {
 							else if (U"↓" == direction) {
 								object.m_y++;
 
-
+								if (9 < object.m_y) {
+									object.m_y = 9;
+								}
 							}
 							else if (U"←" == direction) {
 								object.m_x--;
@@ -239,6 +252,10 @@ struct Editor {
 							}
 							else if (U"→" == direction) {
 								object.m_x++;
+
+								if (9 < object.m_x) {
+									object.m_x = 9;
+								}
 							}
 						}
 					}
@@ -261,7 +278,9 @@ struct Editor {
 			else if (U"↓" == direction) {
 				spawn_rect.y++;
 
-				
+				if (9 < spawn_rect.y) {
+					spawn_rect.y = 9;
+				}
 			}
 			else if (U"←" == direction) {
 
@@ -273,6 +292,10 @@ struct Editor {
 			}
 			else if (U"→" == direction) {
 				spawn_rect.x++;
+
+				if (9 < spawn_rect.x) {
+					spawn_rect.x = 9;
+				}
 			}
 		}
 
